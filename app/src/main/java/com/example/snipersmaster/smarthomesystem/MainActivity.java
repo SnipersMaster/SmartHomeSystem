@@ -21,7 +21,7 @@ import org.json.JSONObject;
 import cz.msebera.android.httpclient.Header;
 
 public class MainActivity extends AppCompatActivity {
-
+    boolean bootup=false;
     Switch d1,d2,d3,d4;
     TextView tc,tm,ts,td;
     AsyncHttpClient client;
@@ -67,131 +67,83 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-        avgdaily();
+        statistics();
+        /*avgdaily();
         avgmonthly();
         avgseasonlly();
-        current();
+        current();*/
     }
-    void avgdaily(){
+
+    void statistics(){
         RequestParams params = new RequestParams();
         params.put("user","1");
         client = new AsyncHttpClient();
-        client.post(url+"avgDailytemp", params, new JsonHttpResponseHandler() {
+        client.post(url+"bootup", params, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 super.onSuccess(statusCode, headers, response);
                 try {
-                    JSONObject obj = response.getJSONObject(0);
-                    td.setText(obj.getString("AVG"));
+                    JSONObject currentTemp = response.getJSONArray(0).getJSONObject(0);
+                    tc.setText(currentTemp.getString("Temp"));
+                    JSONObject avgDaily = response.getJSONArray(1).getJSONObject(0);
+                    td.setText(avgDaily.getString("AVGD"));
+                    JSONObject avgMonthly = response.getJSONArray(2).getJSONObject(0);
+                    tm.setText(avgMonthly.getString("AVGM"));
+                    JSONObject avgSeasonlly = response.getJSONArray(3).getJSONObject(0);
+                    ts.setText(avgSeasonlly.getString("AVGS"));
+                    JSONObject statusD1 = response.getJSONArray(4).getJSONObject(0);
+                    if (statusD1.getString("dMode").equals("1")){d1.setChecked(true);}
+                    else{d1.setChecked(false);}
+                    JSONObject statusD2 = response.getJSONArray(4).getJSONObject(1);
+                    if (statusD2.getString("dMode").equals("1")){d2.setChecked(true);}
+                    else{d2.setChecked(false);}
+                    bootup=true;
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
             @Override
-            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                super.onFailure(statusCode, headers, responseString, throwable);
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable)
+        {
+            super.onFailure(statusCode, headers, responseString, throwable);
                 Toast.makeText(MainActivity.this, responseString, Toast.LENGTH_SHORT).show();
                 throwable.printStackTrace();
             }
         });
 
-    }
-    void avgmonthly(){
-        RequestParams params = new RequestParams();
-        params.put("user","1");
-        client = new AsyncHttpClient();
-        client.post(url+"avgMonthlyTemp", params,new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-                super.onSuccess(statusCode, headers, response);
-                try {
-                    JSONObject obj = response.getJSONObject(0);
-                    tm.setText(obj.getString("AVG"));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-            @Override
-            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                super.onFailure(statusCode, headers, responseString, throwable);
-                Toast.makeText(MainActivity.this, responseString, Toast.LENGTH_SHORT).show();
-                throwable.printStackTrace();
-            }
-        });
-    }
-    void avgseasonlly(){
-        RequestParams params = new RequestParams();
-        params.put("user","1");
-        client = new AsyncHttpClient();
-        client.post(url+"avgSeason", params,new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-                super.onSuccess(statusCode, headers, response);
-                try {
-                    JSONObject obj = response.getJSONObject(0);
-                    ts.setText(obj.getString("AVG"));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
 
-            @Override
-            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                super.onFailure(statusCode, headers, responseString, throwable);
-                Toast.makeText(MainActivity.this, responseString, Toast.LENGTH_SHORT).show();
-                throwable.printStackTrace();
-            }
-
-        });
-    }
-    void current(){
-        RequestParams params = new RequestParams();
-        params.put("user","1");
-        client = new AsyncHttpClient();
-        client.post(url+"currentTemp", params,new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-                super.onSuccess(statusCode, headers, response);
-                try {
-                    JSONObject obj = response.getJSONObject(0);
-                    tc.setText(obj.getString("Temp"));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-            @Override
-            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                super.onFailure(statusCode, headers, responseString, throwable);
-                Toast.makeText(MainActivity.this, responseString, Toast.LENGTH_SHORT).show();
-                throwable.printStackTrace();
-            }
-        });
     }
     void Change(String user,String name,String mode){
-        RequestParams params = new RequestParams();
-        params.put("user",user);
-        params.put("DN",name);
-        params.put("DM",mode);
-        client = new AsyncHttpClient();
-        client.post(url+"changeDeviceMode", params, new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-                super.onSuccess(statusCode, headers, response);
-                try {
-                    JSONObject obj = response.getJSONObject(0);
-                    Toast.makeText(MainActivity.this, obj.getString("status"), Toast.LENGTH_SHORT).show();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-            @Override
-            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                super.onFailure(statusCode, headers, responseString, throwable);
-                Toast.makeText(MainActivity.this, responseString, Toast.LENGTH_SHORT).show();
-                throwable.printStackTrace();
-            }
-        });
+        if(bootup==true) {
 
+
+            RequestParams params = new RequestParams();
+            params.put("user", user);
+            params.put("DN", name);
+            params.put("DM", mode);
+            client = new AsyncHttpClient();
+            client.post(url + "changeDeviceMode", params, new JsonHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                    super.onSuccess(statusCode, headers, response);
+                    try {
+                        JSONObject obj = response.getJSONObject(0);
+
+                        Toast.makeText(MainActivity.this, obj.getString("status"), Toast.LENGTH_SHORT).show();
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                    super.onFailure(statusCode, headers, responseString, throwable);
+                    Toast.makeText(MainActivity.this, responseString, Toast.LENGTH_SHORT).show();
+                    throwable.printStackTrace();
+                }
+            });
+        }
     }
 }
