@@ -13,6 +13,7 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
+import com.pushbots.push.Pushbots;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -66,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
                 else if(!isChecked){Change("1","D4","0");}
             }
         });
-
+        Pushbots.sharedInstance().init(this);
         statistics();
         /*avgdaily();
         avgmonthly();
