@@ -16,9 +16,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Luncher">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <action android:name="com.example.snipersmaster.smarthomesystem.MESSAGE" />
+        <!--<intent-filter>-->
+            <!--<action android:name="android.intent.action.MAIN" />-->
+            <!--<action android:name="com.example.snipersmaster.smarthomesystem.MESSAGE" />-->
+            <!--<category android:name="android.intent.category.DEFAULT" />-->
+            <!--<category android:name="android.intent.category.LAUNCHER" />-->
+        <!--</intent-filter>-->
+        </activity>
+        <activity android:name=".Scedule">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="com.example.snipersmaster.smarthomesystem.MESSAGE" />
             <category android:name="android.intent.category.DEFAULT" />
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>

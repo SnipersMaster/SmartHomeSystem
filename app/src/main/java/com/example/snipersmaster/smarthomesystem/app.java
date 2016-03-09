@@ -9,7 +9,7 @@ public class app {
     static SharedPreferences.Editor editor;
 
     public static String QR="";
-    public static String url="http://192.168.0.91:3000/";
+    public static String url="http://104.197.212.107:3000/";
     public static String user="";
     public static void Set(String QRget){
         QR=QRget;

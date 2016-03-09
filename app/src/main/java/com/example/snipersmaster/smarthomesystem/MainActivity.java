@@ -1,13 +1,17 @@
 package com.example.snipersmaster.smarthomesystem;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.DatePicker;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpClient;
@@ -24,6 +28,7 @@ import org.json.JSONObject;
 import cz.msebera.android.httpclient.Header;
 
 public class MainActivity extends AppCompatActivity {
+    int end=0;
     Button btn;
     boolean bootup=false;
     Switch d1,d2,d3,d4;
@@ -70,12 +75,15 @@ public class MainActivity extends AppCompatActivity {
                 else if(!isChecked){Change("D4","0");}
             }
         });
-        //Pushbots.sharedInstance().init(this);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
         statistics();
-        /*avgdaily();
-        avgmonthly();
-        avgseasonlly();
-        current();*/
+
+
     }
 
 
@@ -212,6 +220,10 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-
+        if (end==1)
+        {
+            finish();
+        }
+        end++;
     }
 }
