@@ -15,14 +15,6 @@
         android:layout_height="match_parent"
         android:gravity="center">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="New Text"
-            android:id="@+id/textView4"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true" />
-
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -43,7 +35,9 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center_horizontal">
 
             <Switch
                 android:layout_width="184dp"
@@ -87,6 +81,103 @@
                 android:layout_centerHorizontal="true" />
         </LinearLayout>
 
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center_horizontal">
+
+                <ToggleButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tglSUN"
+                    android:textOn="SUN"
+                    android:textOff="SUN"
+                    android:checked="false" />
+
+                <ToggleButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tglMON"
+                    android:textOn="MON"
+                    android:textOff="MON"/>
+
+                <ToggleButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textOn="TUE"
+                    android:textOff="TUE"
+                    android:id="@+id/tglTUE" />
+
+                <ToggleButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textOn="WED"
+                    android:textOff="WED"
+                    android:id="@+id/tglWED" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal">
+
+                <ToggleButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textOn="THU"
+                    android:textOff="THU"
+                    android:id="@+id/tglTHU" />
+
+                <ToggleButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textOn="FRI"
+                    android:textOff="FRI"
+                    android:id="@+id/tglFRI" />
+
+                <ToggleButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textOn="SAT"
+                    android:textOff="SAT"
+                    android:id="@+id/tglSAT" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="1"
+            android:layout_gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Job Name:"
+                android:id="@+id/txtComment"
+                android:layout_marginTop="10dp" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/edComment"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="0.96"
+                android:hint="Write Comments Here" />
+        </LinearLayout>
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -94,7 +185,8 @@
             android:id="@+id/btnSaveSceduale"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="88dp" />
+            android:clickable="false"
+            android:enabled="false" />
     </LinearLayout>
 
 </RelativeLayout>

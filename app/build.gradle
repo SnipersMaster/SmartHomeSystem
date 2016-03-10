@@ -27,4 +27,5 @@ dependencies {
     compile 'com.pushbots:pushbots-lib:2.0.13@aar'
     compile 'com.dlazaro66.qrcodereaderview:qrcodereaderview:1.0.0'
     compile 'com.brucetoo.pickview:library:1.1.1'
+    compile 'com.android.support:design:23.1.1'
 }

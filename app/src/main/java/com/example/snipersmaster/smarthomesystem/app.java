@@ -30,7 +30,7 @@ public class app {
 
     public static String getUser(Context context){
         sharedPreferences = context.getSharedPreferences("smarthouse",Context.MODE_PRIVATE);
-        return sharedPreferences.getString("user","");
+        return sharedPreferences.getString("user","1");
     }
     public static Integer getLuncher(Context context){
         sharedPreferences = context.getSharedPreferences("smarthouse",Context.MODE_PRIVATE);

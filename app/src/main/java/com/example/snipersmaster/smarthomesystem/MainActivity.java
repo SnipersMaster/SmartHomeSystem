@@ -3,6 +3,7 @@ package com.example.snipersmaster.smarthomesystem;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -47,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         d3=(Switch)findViewById(R.id.device3);
         d4=(Switch)findViewById(R.id.device4);
         btn=(Button)findViewById(R.id.button);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         d1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -82,6 +84,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         statistics();
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, Scedule.class);
+                startActivity(intent);
+            }
+        });
 
 
     }
@@ -188,8 +197,6 @@ public class MainActivity extends AppCompatActivity {
     }
     void Change(String name,String mode){
         if(bootup) {
-
-
             RequestParams params = new RequestParams();
             params.put("user", app.getUser(MainActivity.this));
             params.put("DN", name);
