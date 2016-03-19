@@ -19,6 +19,7 @@ public class Luncher extends AppCompatActivity {
     AsyncHttpClient client;
     Button btnQR,btnin;
     EditText txuser,txpass,txQR;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +44,7 @@ public class Luncher extends AppCompatActivity {
                 startActivity(in);
          }
         });
+
         //log-in
         btnin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,7 +62,6 @@ public class Luncher extends AppCompatActivity {
                         try {
                             JSONObject user = response.getJSONObject(0);
                             app.setUser(Luncher.this,user.getString("ID"));
-                            //    Toast.makeText(Luncher.this, user.getString("ID"), Toast.LENGTH_SHORT).show();
                             Intent app = new Intent(Luncher.this,MainActivity.class);
                             app.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(app);
@@ -74,6 +75,7 @@ public class Luncher extends AppCompatActivity {
             }
         });
     }
+
     @Override
     protected void onResume() {
         super.onResume();

@@ -35,6 +35,7 @@ public class Scedule extends AppCompatActivity {
     ToggleButton tglSAT,tglSUN,tglMON,tglTUE,tglWED,tglTHU,tglFRI;
     Button btnDate, btnTime, btnSave;
     int Thoure, Tminute, Dyear, Dmonth, Dday;
+
     EditText ed;
     String Job="",St = "", D1 = "5 off", D2 = "6 off", D3 = "13 off", D4 = "26 off",Week="",SAT="",SUN="",MON="",TUE="",WED="",THU="",FRI="";
     AsyncHttpClient client;
@@ -57,6 +58,9 @@ public class Scedule extends AppCompatActivity {
         tglTHU=(ToggleButton)findViewById(R.id.tglTHU);
         tglFRI=(ToggleButton)findViewById(R.id.tglFRI);
         ed = (EditText) findViewById(R.id.edComment);
+
+        app.deviceGet(Scedule.this,sD1,sD2,sD3,sD4);
+
         final Calendar c = Calendar.getInstance();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         final String formattedDate = df.format(c.getTime());
@@ -187,7 +191,7 @@ public class Scedule extends AppCompatActivity {
                         @Override
                         public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                             super.onFailure(statusCode, headers, responseString, throwable);
-                            Toast.makeText(Scedule.this, responseString, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Scedule.this,responseString, Toast.LENGTH_SHORT).show();
                             throwable.printStackTrace();
                         }
 
@@ -252,7 +256,8 @@ public class Scedule extends AppCompatActivity {
             }
         });
             }
-        void setScedual(){
+
+    void setScedual(){
 
             switch (SUN)
             {

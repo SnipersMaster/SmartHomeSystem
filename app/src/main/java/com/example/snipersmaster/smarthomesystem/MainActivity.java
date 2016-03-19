@@ -1,36 +1,31 @@
 package com.example.snipersmaster.smarthomesystem;
 
-import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
-
 import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
-import com.loopj.android.http.TextHttpResponseHandler;
-import com.pushbots.push.Pushbots;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import cz.msebera.android.httpclient.Header;
 
 public class MainActivity extends AppCompatActivity {
     int end=0;
-    Button btn;
     boolean bootup=false;
     Switch d1,d2,d3,d4;
     TextView tc,tm,ts,td;
@@ -47,42 +42,51 @@ public class MainActivity extends AppCompatActivity {
         d2=(Switch)findViewById(R.id.device2);
         d3=(Switch)findViewById(R.id.device3);
         d4=(Switch)findViewById(R.id.device4);
-        btn=(Button)findViewById(R.id.button);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        d1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){Change("D1","1");}
-                else if(!isChecked){Change("D1","0");}
-            }
-        });
-        d2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){Change("D2","1");}
-                else if(!isChecked){Change("D2","0");}
-            }
-        });
-        d3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){Change("D3","1");}
-                else if(!isChecked){Change("D3","0");}
-            }
-        });
-        d4.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){Change("D4","1");}
-                else if(!isChecked){Change("D4","0");}
-            }
-        });
-        btn.setOnClickListener(new View.OnClickListener() {
+
+        app.deviceGet(MainActivity.this, d1, d2, d3, d4);
+
+        d1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if (d1.isChecked()) {
+                    Change("D1", "1", d1);
+                } else if (!d1.isChecked()) {
+                    Change("D1", "0", d1);
+                }
             }
         });
+        d2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (d2.isChecked()) {
+                    Change("D2", "1", d2);
+                } else if (!d2.isChecked()) {
+                    Change("D2", "0", d2);
+                }
+            }
+        });
+        d3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (d3.isChecked()) {
+                    Change("D3", "1", d3);
+                } else if (!d3.isChecked()) {
+                    Change("D3", "0", d3);
+                }
+            }
+        });
+        d4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (d4.isChecked()) {
+                    Change("D4", "1", d4);
+                } else if (!d4.isChecked()) {
+                    Change("D4", "0", d4);
+                }
+            }
+        });
+
         statistics();
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,7 +98,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
 
     void statistics(){
         RequestParams params = new RequestParams();
@@ -139,10 +142,10 @@ public class MainActivity extends AppCompatActivity {
                 try{
                     JSONObject avgSeasonlly = response.getJSONArray(3).getJSONObject(0);
                     ts.setText(avgSeasonlly.getString("AVGS"));
-                    if(avgSeasonlly.getString("AVGM").equals("null")){
-                        tm.setText("No Recordes ");
+                    if(avgSeasonlly.getString("AVGS").equals("null")){
+                        ts.setText("No Recordes ");
                     }else {
-                        tm.setText(avgSeasonlly.getString("AVGM"));
+                        ts.setText(avgSeasonlly.getString("AVGS"));
                     }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -195,7 +198,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-    void Change(String name,String mode){
+
+    void Change(String name,String mode,final Switch s){
         if(bootup) {
             RequestParams params = new RequestParams();
             params.put("user", app.getUser(MainActivity.this));
@@ -208,6 +212,10 @@ public class MainActivity extends AppCompatActivity {
                     super.onSuccess(statusCode, headers, response);
                     try {
                         JSONObject obj = response.getJSONObject(0);
+                        if(obj.getString("status").equals("Device Is Not Connected")){
+                            if (s.isChecked()) {s.setChecked(false);}
+                            else{ s.setChecked(true);}
+                        }
                         Toast.makeText(MainActivity.this, obj.getString("status"), Toast.LENGTH_SHORT).show();
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -227,10 +235,73 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (end==1)
+        if (end>=1)
         {
             finish();
         }
         end++;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater edit =getMenuInflater();
+        edit.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch(id){
+            case R.id.helpOp:
+                Toast.makeText(MainActivity.this, "5asfo", Toast.LENGTH_SHORT).show();
+            break;
+            case R.id.closeOp:
+                MainActivity.this.finish();
+                break;
+            case R.id.editOp:
+                showDialog();
+                break;
+            case R.id.setOp:
+                Toast.makeText(MainActivity.this, "Setting", Toast.LENGTH_SHORT).show();
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void showDialog(){
+        AlertDialog.Builder editDialog = new AlertDialog.Builder(this);
+        LayoutInflater in = this.getLayoutInflater();
+        final View dialogView = in.inflate(R.layout.editdialog, null);
+        final EditText ed1 =(EditText)dialogView.findViewById(R.id.editD1);
+        final EditText ed2 =(EditText)dialogView.findViewById(R.id.editD2);
+        final EditText ed3 =(EditText)dialogView.findViewById(R.id.editD3);
+        final EditText ed4 =(EditText)dialogView.findViewById(R.id.editD4);
+        editDialog.setView(dialogView)
+                .setTitle("Rename Your Devices")
+                .setPositiveButton("Save", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        d1.setText(ed1.getText().toString());
+                        d2.setText(ed2.getText().toString());
+                        d3.setText(ed3.getText().toString());
+                        d4.setText(ed4.getText().toString());
+                        app.setDevice(MainActivity.this,ed1.getText().toString().trim(),ed2.getText().toString().trim(),ed3.getText().toString().trim(),ed4.getText().toString().trim());
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+        AlertDialog alert = editDialog.create();
+        alert.show();
+        if (alert.isShowing()){
+            app.deviceGet(MainActivity.this,ed1,ed2,ed3,ed4);
+        }
+
+
     }
 }

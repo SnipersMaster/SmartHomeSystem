@@ -121,7 +121,8 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -141,7 +142,8 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -161,7 +163,8 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -215,45 +218,42 @@
         </LinearLayout>
 
         <Switch
-            android:layout_width="184dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Device 1"
             android:id="@+id/device1"
             android:checked="false"
             android:layout_gravity="center_vertical"
-            android:layout_marginTop="8dp"
-            android:textColor="#ea792222" />
+            android:textColor="#ea792222"
+            android:layout_marginBottom="4dp"
+            android:layout_marginTop="4dp" />
 
         <Switch
-            android:layout_width="184dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Device 2"
             android:id="@+id/device2"
             android:checked="false"
-            android:textColor="#f5293381" />
+            android:textColor="#f5293381"
+            android:layout_marginBottom="4dp" />
 
         <Switch
-            android:layout_width="184dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Device 3"
             android:id="@+id/device3"
             android:checked="false"
-            android:textColor="#f5712981" />
+            android:textColor="#f5712981"
+            android:layout_marginBottom="4dp" />
 
         <Switch
-            android:layout_width="184dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Device 4"
             android:id="@+id/device4"
             android:checked="false"
-            android:textColor="#f8298129" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="New Button"
-            android:id="@+id/button"
-            android:layout_gravity="center_horizontal" />
+            android:textColor="#f8298129"
+            android:layout_marginBottom="4dp" />
 
     </LinearLayout>
 
