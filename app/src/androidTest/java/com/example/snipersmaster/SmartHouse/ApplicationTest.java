@@ -1,4 +1,4 @@
-package com.example.snipersmaster.smarthomesystem;
+package com.example.snipersmaster.SmartHouse;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

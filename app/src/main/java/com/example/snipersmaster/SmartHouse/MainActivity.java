@@ -1,4 +1,4 @@
-package com.example.snipersmaster.smarthomesystem;
+package com.example.snipersmaster.SmartHouse;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -312,7 +312,7 @@ public class MainActivity extends AppCompatActivity {
     public void showDialog(){
         AlertDialog.Builder editDialog = new AlertDialog.Builder(this);
         LayoutInflater in = this.getLayoutInflater();
-        final View dialogView = in.inflate(R.layout.editdialog, null);
+        final View dialogView = in.inflate(R.layout.editdialogg, null);
         final EditText ed1 =(EditText)dialogView.findViewById(R.id.editD1);
         final EditText ed2 =(EditText)dialogView.findViewById(R.id.editD2);
         final EditText ed3 =(EditText)dialogView.findViewById(R.id.editD3);

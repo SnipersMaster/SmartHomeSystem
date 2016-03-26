@@ -1,4 +1,4 @@
-package com.example.snipersmaster.smarthomesystem;
+package com.example.snipersmaster.SmartHouse;
 
 import org.junit.Test;
 

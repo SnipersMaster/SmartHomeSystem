@@ -1,8 +1,6 @@
 package com.example.snipersmaster.smarthomesystem;
 
-import android.app.AlertDialog;
 import android.app.TimePickerDialog;
-import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -15,16 +13,24 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 import android.widget.ToggleButton;
+
 import com.bruce.pickerview.popwindow.DatePickerPopWin;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+
 import cz.msebera.android.httpclient.Header;
 
 
@@ -33,6 +39,7 @@ public class Scedule extends AppCompatActivity {
     ToggleButton tglSAT,tglSUN,tglMON,tglTUE,tglWED,tglTHU,tglFRI;
     Button btnDate, btnTime, btnSave;
     int Thoure, Tminute, Dyear, Dmonth, Dday;
+
     EditText ed;
     String Job="",St = "", D1 = "5 off", D2 = "6 off", D3 = "13 off", D4 = "26 off",Week="",SAT="",SUN="",MON="",TUE="",WED="",THU="",FRI="";
     AsyncHttpClient client;
