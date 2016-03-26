@@ -1,4 +1,4 @@
-package com.example.snipersmaster.SmartHouse;
+package com.ev.SmartHouse;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -15,10 +15,12 @@ import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -49,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (inout.isChecked()) {
                     app.URL("1");
-                    Toast.makeText(MainActivity.this, app.url, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this,app.url, Toast.LENGTH_SHORT).show();
                 } else if (!inout.isChecked()) {
                     app.URL("0");
                     Toast.makeText(MainActivity.this, app.url, Toast.LENGTH_SHORT).show();
@@ -121,8 +123,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(app.Mode.equals("0")){
-                Intent intent = new Intent(MainActivity.this, Scedule.class);
-                startActivity(intent);}
+                    Intent intent = new Intent(MainActivity.this, Scedule.class);
+                    startActivity(intent);}
                 else{
                     Toast.makeText(MainActivity.this, "Please connect to the Internet", Toast.LENGTH_SHORT).show();
                 }
@@ -133,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
     // Getting Temps and Current setting of Devices
     void statistics(){
         RequestParams params = new RequestParams();
-        params.put("user",app.getUser(MainActivity.this));
+        params.put("user", app.getUser(MainActivity.this));
         client = new AsyncHttpClient();
         client.post(app.url+"bootup", params, new JsonHttpResponseHandler() {
             @Override
@@ -212,8 +214,8 @@ public class MainActivity extends AppCompatActivity {
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable)
             {
                 super.onFailure(statusCode, headers, responseString, throwable);
-                    Toast.makeText(MainActivity.this, responseString, Toast.LENGTH_SHORT).show();
-                    throwable.printStackTrace();
+                Toast.makeText(MainActivity.this, responseString, Toast.LENGTH_SHORT).show();
+                throwable.printStackTrace();
             }
         });
     }
@@ -235,11 +237,11 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, String responseString) {
                     if(responseString.equals("0") && !s.isChecked()){
-                            s.setChecked(false);
-                            Toast.makeText(MainActivity.this, s.getText().toString()+" is off", Toast.LENGTH_SHORT).show();
+                        s.setChecked(false);
+                        Toast.makeText(MainActivity.this, s.getText().toString()+" is off", Toast.LENGTH_SHORT).show();
                     }else if(responseString.equals("1") && s.isChecked()){
-                            s.setChecked(true);
-                            Toast.makeText(MainActivity.this,s.getText().toString()+" is on", Toast.LENGTH_SHORT).show();
+                        s.setChecked(true);
+                        Toast.makeText(MainActivity.this,s.getText().toString()+" is on", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
@@ -326,7 +328,7 @@ public class MainActivity extends AppCompatActivity {
                         d2.setText(ed2.getText().toString());
                         d3.setText(ed3.getText().toString());
                         d4.setText(ed4.getText().toString());
-                        app.setDevice(MainActivity.this,ed1.getText().toString().trim(),ed2.getText().toString().trim(),ed3.getText().toString().trim(),ed4.getText().toString().trim());
+                        app.setDevice(MainActivity.this, ed1.getText().toString().trim(), ed2.getText().toString().trim(), ed3.getText().toString().trim(), ed4.getText().toString().trim());
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -338,7 +340,7 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog alert = editDialog.create();
         alert.show();
         if (alert.isShowing()){
-            app.deviceGet(MainActivity.this,ed1,ed2,ed3,ed4);
+            app.deviceGet(MainActivity.this, ed1, ed2, ed3, ed4);
         }
 
 

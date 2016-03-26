@@ -27,7 +27,7 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import com.ev.SmartHouse.MainActivity;
-import com.example.snipersmaster.SmartHouse.R;
+import com.ev.SmartHouse.R;
 import com.google.android.gms.gcm.GcmListenerService;
 
 public class MyGcmListenerService extends GcmListenerService {

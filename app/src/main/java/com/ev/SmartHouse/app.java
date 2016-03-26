@@ -1,17 +1,18 @@
-package com.example.snipersmaster.SmartHouse;
+package com.ev.SmartHouse;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Switch;
+
 import org.json.JSONArray;
 
 public class app {
 
     static SharedPreferences sharedPreferences;
     static SharedPreferences.Editor editor;
-//63a3ceac95e1307c1d2e96261d3103044307b7ef
+    //63a3ceac95e1307c1d2e96261d3103044307b7ef
     public static String QR="";
     public static String Mode="";
     public static String local="localhost",remote="104.236.253.6";
@@ -24,7 +25,7 @@ public class app {
             url="http://"+local+":4000/";}
         else if (mode.equals("0"))
         {Mode="0";
-        url="http://"+remote+":3000/";}
+            url="http://"+remote+":3000/";}
     }
     public static String getURL(){
         return Mode;
@@ -104,4 +105,3 @@ public class app {
     }
 
 }
-

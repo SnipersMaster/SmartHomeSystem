@@ -1,10 +1,9 @@
-package com.example.snipersmaster.smarthomesystem;
+package com.ev.SmartHouse;
 
 import android.app.Activity;
 import android.graphics.PointF;
 import android.os.Bundle;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.dlazaro66.qrcodereaderview.QRCodeReaderView;
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.snipersmaster.SmartHouse">
+    package="com.ev.SmartHouse">
 
 
 
@@ -15,7 +15,7 @@
         <activity android:name="com.ev.SmartHouse.Luncher">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
-            <action android:name="com.example.snipersmaster.smarthomesystem.MESSAGE" />
+            <action android:name="com.ev.SmartHouse.MESSAGE" />
             <category android:name="android.intent.category.DEFAULT" />
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
@@ -23,7 +23,7 @@
         <activity android:name="com.ev.SmartHouse.Scedule">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <action android:name="com.example.snipersmaster.smarthomesystem.MESSAGE" />
+                <action android:name="com.ev.SmartHouse.MESSAGE" />
         </intent-filter>
         </activity>
         <activity android:name="com.ev.SmartHouse.MainActivity">

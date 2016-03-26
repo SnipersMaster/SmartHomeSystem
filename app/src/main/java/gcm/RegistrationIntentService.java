@@ -24,9 +24,10 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.ev.SmartHouse.Luncher;
 import com.ev.SmartHouse.MainActivity;
+import com.ev.SmartHouse.R;
 import com.ev.SmartHouse.app;
-import com.example.snipersmaster.SmartHouse.R;
 import com.google.android.gms.gcm.GcmPubSub;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.google.android.gms.iid.InstanceID;
@@ -114,6 +115,11 @@ public class RegistrationIntentService extends IntentService {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
                 Log.d("gcm",responseString);
+
+//                Intent app = new Intent(RegistrationIntentService.this, MainActivity.class);
+//                app.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                startActivity(app);
+
 
             }
         });
