@@ -20,6 +20,17 @@
         tools:context="com.example.snipersmaster.smarthomesystem.MainActivity.MainActivity"
         android:orientation="vertical">
 
+        <Switch
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="New Switch"
+            android:id="@+id/sStatus"
+            android:textOff="Far from Home"
+            android:textOn="Inside Home"
+
+
+            android:enabled="true" />
+
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -76,6 +87,7 @@
                 android:text="Current"
                 android:id="@+id/txtCurrentTemp"
                 android:layout_marginTop="4dp" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -266,4 +278,5 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
 </RelativeLayout>

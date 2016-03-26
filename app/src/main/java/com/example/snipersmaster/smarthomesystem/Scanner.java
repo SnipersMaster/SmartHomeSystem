@@ -4,10 +4,7 @@ import android.app.Activity;
 import android.graphics.PointF;
 import android.os.Bundle;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.dlazaro66.qrcodereaderview.QRCodeReaderView;
-
 
 public class Scanner extends Activity implements QRCodeReaderView.OnQRCodeReadListener {
 

@@ -65,7 +65,6 @@ public class Luncher extends AppCompatActivity {
                             Intent app = new Intent(Luncher.this,MainActivity.class);
                             app.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(app);
-
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Toast.makeText(Luncher.this, "Username or Password is invalid", Toast.LENGTH_SHORT).show();

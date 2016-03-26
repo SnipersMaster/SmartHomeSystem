@@ -5,45 +5,54 @@ import android.content.SharedPreferences;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Switch;
-
 import org.json.JSONArray;
 
 public class app {
 
     static SharedPreferences sharedPreferences;
     static SharedPreferences.Editor editor;
-
+//63a3ceac95e1307c1d2e96261d3103044307b7ef
     public static String QR="";
+    public static String Mode="";
+    public static String local="localhost",remote="104.236.253.6";
     public static String url="http://104.236.253.6:3000/";
     public static String user="";
-    public static void Set(String QRget){
-        QR=QRget;
-    }
-    public static void setUser(Context context,String userget){
 
+    public static void URL(String mode){
+        if (mode.equals("1")){
+            Mode ="1";
+            url="http://"+local+":4000/";}
+        else if (mode.equals("0"))
+        {Mode="0";
+        url="http://"+remote+":3000/";}
+    }
+    public static String getURL(){
+        return Mode;
+    }
+
+    public static void Set(String QRget){QR=QRget;}
+
+    public static void setUser(Context context,String userget){
         try {
             sharedPreferences = context.getSharedPreferences("smarthouse",Context.MODE_PRIVATE);
             editor=sharedPreferences.edit();
             editor.putString("user", userget);
             editor.putInt("luncher",1);
             editor.apply();
-        }catch (Exception ex){
-            ex.printStackTrace();
-        }
-
+        }catch (Exception ex){ex.printStackTrace();}
     }
 
     public static String getUser(Context context){
         sharedPreferences = context.getSharedPreferences("smarthouse",Context.MODE_PRIVATE);
         return sharedPreferences.getString("user","1");
     }
+
     public static Integer getLuncher(Context context){
         sharedPreferences = context.getSharedPreferences("smarthouse",Context.MODE_PRIVATE);
         return sharedPreferences.getInt("luncher", 0);
     }
 
     public static void setDevice(Context context,String d1,String d2, String d3, String d4){
-
         try {
             sharedPreferences = context.getSharedPreferences("smarthouse", Context.MODE_PRIVATE);
             editor=sharedPreferences.edit();
@@ -52,10 +61,9 @@ public class app {
             editor.putString("d3", "\""+d3+"\"");
             editor.putString("d4", "\""+d4+"\"");
             editor.apply();
-        }catch (Exception ex){
-            ex.printStackTrace();
-        }
+        }catch (Exception ex){ex.printStackTrace();}
     }
+
     public static String getDevice(Context context){
         sharedPreferences = context.getSharedPreferences("smarthouse",Context.MODE_PRIVATE);
         String option1 = sharedPreferences.getString("d1","Device 1");
@@ -92,10 +100,7 @@ public class app {
                 d3.setText(obj3);
                 d4.setText(obj4);}
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+        } catch (Exception e) {e.printStackTrace();}
     }
 
 }
