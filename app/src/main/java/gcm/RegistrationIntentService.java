@@ -101,29 +101,9 @@ public class RegistrationIntentService extends IntentService {
      */
     private void sendRegistrationToServer(String token) {
        Log.d("GCM","Your Token is "+token);
-        AsyncHttpClient asyncHttpClient=new AsyncHttpClient();
-        RequestParams params = new RequestParams();
-        params.put("user", app.user);
-        params.put("token", token);
-        asyncHttpClient.post(RegistrationIntentService.this, app.url + "token",params, new JsonHttpResponseHandler() {
 
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                super.onFailure(statusCode, headers, throwable, errorResponse);
-            }
-
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, String responseString) {
-                Log.d("gcm",responseString);
-
-//                Intent app = new Intent(RegistrationIntentService.this, MainActivity.class);
-//                app.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                startActivity(app);
-
-
-            }
-        });
-        // Add custom implementation, as needed.
+        //app.gcmregister(RegistrationIntentService.this,token);
+    // Add custom implementation, as needed.
     }
 
     /**

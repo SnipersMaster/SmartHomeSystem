@@ -71,21 +71,23 @@ public class Luncher extends AppCompatActivity {
                 client = new AsyncHttpClient();
                 client.post(app.url + "auth", params, new JsonHttpResponseHandler() {
 
-                    @Override
-                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                        super.onSuccess(statusCode, headers, response);
 
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                        super.onSuccess(statusCode, headers, response);
                         try {
                             // Registering BroadcastReceiver
-                            Toast.makeText(Luncher.this, response.getString("ID"), Toast.LENGTH_SHORT).show();
-//                            app.setUser(Luncher.this, response.getString("ID"));
-//                            RegistrationIntentService.id=response.getString("ID");
-//
-//                            if (checkPlayServices()) {
-//                                // Start IntentService to register this application with GCM.
-//                                Intent intent = new Intent(Luncher.this, RegistrationIntentService.class);
-//                                startService(intent);
-//                            }
+
+                            Toast.makeText(Luncher.this, response.getJSONObject(0).getString("ID"), Toast.LENGTH_SHORT).show();
+
+                           app.setUser(Luncher.this, response.getJSONObject(0).getString("ID"));
+                           RegistrationIntentService.id=response.getJSONObject(0).getString("ID");
+
+                            if (checkPlayServices()) {
+                                // Start IntentService to register this application with GCM.
+                                Intent intent = new Intent(Luncher.this, RegistrationIntentService.class);
+                                startService(intent);
+                            }
 
 
                         } catch (Exception e) {
@@ -94,28 +96,6 @@ public class Luncher extends AppCompatActivity {
                         }
                     }
 
-//                    @Override
-//                    public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-//                        super.onSuccess(statusCode, headers, response);
-//                        try {
-//                            // Registering BroadcastReceiver
-//                            JSONObject user = response.getJSONObject(0);
-//                            app.setUser(Luncher.this, user.getString("ID"));
-//                            RegistrationIntentService.id=user.getString("ID");
-//
-//                            if (checkPlayServices()) {
-//                                // Start IntentService to register this application with GCM.
-//                                Intent intent = new Intent(Luncher.this, RegistrationIntentService.class);
-//                                startService(intent);
-//                            }
-//
-//
-//                        } catch (Exception e) {
-//                            e.printStackTrace();
-//                            Toast.makeText(Luncher.this, "Username or Password is invalid", Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//                });
                     //   }
                     // });
                 });

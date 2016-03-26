@@ -218,6 +218,8 @@ public class MainActivity extends AppCompatActivity {
                 throwable.printStackTrace();
             }
         });
+
+        Toast.makeText(MainActivity.this,String.valueOf(app.isgcmregistered(MainActivity.this)),Toast.LENGTH_SHORT).show();
     }
 
     void ChangeLocal(String name, String mode,final Switch s){

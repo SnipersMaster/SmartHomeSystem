@@ -19,6 +19,34 @@ public class app {
     public static String url="http://104.236.253.6:3000/";
     public static String user="";
 
+    static boolean isGCMregister;
+    public static void gcmregister(Context context,String token){
+        isGCMregister=false;
+        try {
+            sharedPreferences = context.getSharedPreferences("smarthouse",Context.MODE_PRIVATE);
+            editor=sharedPreferences.edit();
+            editor.putString("token", token);
+            editor.putBoolean("isGCMregister",false);
+            editor.apply();
+        }catch (Exception ex){ex.printStackTrace();}
+
+    }
+    public static void setGCMisRegistered(Context context){
+        isGCMregister=false;
+        try {
+            sharedPreferences = context.getSharedPreferences("smarthouse",Context.MODE_PRIVATE);
+            editor=sharedPreferences.edit();
+            editor.putBoolean("isGCMregister",true);
+            editor.apply();
+        }catch (Exception ex){ex.printStackTrace();}
+
+    }
+    public static boolean isgcmregistered(Context context){
+            sharedPreferences = context.getSharedPreferences("smarthouse",Context.MODE_PRIVATE);
+            return sharedPreferences.getBoolean("isGCMregister",false);
+
+    }
+
     public static void URL(String mode){
         if (mode.equals("1")){
             Mode ="1";
