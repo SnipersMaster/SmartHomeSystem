@@ -65,10 +65,10 @@
             </intent-filter>
         </service>
         <!-- [END instanceId_listener] -->
-        <service
-            android:name=".RegistrationIntentService"
-            android:exported="false">
-        </service>
+        <!--<service-->
+            <!--android:name=".RegistrationIntentService"-->
+            <!--android:exported="false">-->
+        <!--</service>-->
     </application>
 
 </manifest>

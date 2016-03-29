@@ -17,6 +17,9 @@ import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.gcm.GoogleCloudMessaging;
+import com.google.android.gms.iid.InstanceID;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -24,6 +27,9 @@ import com.loopj.android.http.TextHttpResponseHandler;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.IOException;
+
 import cz.msebera.android.httpclient.Header;
 
 public class MainActivity extends AppCompatActivity {
@@ -121,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
         });
         // Set the Devices
         statistics();
-        reg();
+
     }
 
     // Getting Temps and Current setting of Devices
@@ -377,29 +383,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void reg(){
-        if(app.isgcmregistered(MainActivity.this)==false){
-            AsyncHttpClient asyncHttpClient=new AsyncHttpClient();
-            RequestParams params = new RequestParams();
-            params.put("user", app.getUser(MainActivity.this));
-            params.put("token", app.getToken(MainActivity.this));
-            asyncHttpClient.post(MainActivity.this, app.url + "token", params, new TextHttpResponseHandler() {
-                        @Override
-                        public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                            Log.d("gcm", responseString);
-                        }
 
-                        @Override
-                        public void onSuccess(int statusCode, Header[] headers, String responseString) {
-                            Log.d("gcm", responseString);
-                            if (responseString.equals("ack token")) {
-                                app.setGCMlook(MainActivity.this);
-                            }
-                        }
-                    }
-            );
-        }
-    }
 
     @Override
     protected void onResume() {
