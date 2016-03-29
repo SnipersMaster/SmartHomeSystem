@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/helpOp"
-        android:title="Help" />
-    <item android:id="@+id/setOp"
-        android:title="Settings" />
     <item android:id="@+id/editOp"
         android:title="Edit" />
-    <item android:id="@+id/closeOp"
-        android:title="Close" />
+    <item android:id="@+id/scheduleOp"
+        android:title="Schedule" />
 </menu>

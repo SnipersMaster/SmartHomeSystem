@@ -11,29 +11,23 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
-import com.loopj.android.http.TextHttpResponseHandler;
-
 import org.json.JSONArray;
-
 import cz.msebera.android.httpclient.Header;
 
 public class Luncher extends AppCompatActivity {
     AsyncHttpClient client;
     Button btnQR,btnin;
     private static final String TAG = "Tag";
-
-
     EditText txuser,txpass,txQR;
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
     private BroadcastReceiver mRegistrationBroadcastReceiver;
     private boolean isReceiverRegistered;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,11 +73,8 @@ public class Luncher extends AppCompatActivity {
                         try {
                             // Registering BroadcastReceiver
 
-                            Toast.makeText(Luncher.this, response.getJSONObject(0).getString("ID"), Toast.LENGTH_SHORT).show();
-
                           app.setUser(Luncher.this, response.getJSONObject(0).getString("ID"));
                           RegistrationIntentService.id=response.getJSONObject(0).getString("ID");
-
 
                             if (checkPlayServices()) {
                                 // Start IntentService to register this application with GCM.
@@ -104,6 +95,7 @@ public class Luncher extends AppCompatActivity {
                 });
             }});
     }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -111,7 +103,6 @@ public class Luncher extends AppCompatActivity {
         txQR.setText(app.QR);
         //registerReceiver();
     }
-
 
     @Override
     protected void onPause() {
@@ -128,6 +119,7 @@ public class Luncher extends AppCompatActivity {
             isReceiverRegistered = true;
         }
     }
+
     private boolean checkPlayServices() {
         GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
         int resultCode = apiAvailability.isGooglePlayServicesAvailable(this);

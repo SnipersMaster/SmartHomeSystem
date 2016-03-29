@@ -1,7 +1,12 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    >
+<RelativeLayout
+android:layout_width="match_parent"
+android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -15,32 +20,51 @@
         android:layout_height="match_parent"
         android:gravity="center">
 
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="1"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/edComment"
+                android:layout_gravity="center_horizontal"
+                android:hint="Schedule Name" />
+        </LinearLayout>
+
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Start Date"
             android:id="@+id/btnDate"
             android:layout_above="@+id/sD1"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp" />
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Start Time"
             android:id="@+id/btnTime"
             android:layout_above="@+id/btnDate"
             android:layout_alignRight="@+id/btnDate"
-            android:layout_alignEnd="@+id/btnDate" />
+            android:layout_alignEnd="@+id/btnDate"
+            android:layout_marginTop="10dp" />
 
         <LinearLayout
             android:orientation="vertical"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:layout_gravity="center_horizontal">
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="10dp">
 
-            <Switch
-                android:layout_width="184dp"
+            <android.support.v7.widget.SwitchCompat
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Device 1"
                 android:id="@+id/sD1"
@@ -50,8 +74,8 @@
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true" />
 
-            <Switch
-                android:layout_width="184dp"
+            <android.support.v7.widget.SwitchCompat
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Device 2"
                 android:id="@+id/sD2"
@@ -60,8 +84,8 @@
                 android:layout_below="@+id/sD1"
                 android:layout_centerHorizontal="true" />
 
-            <Switch
-                android:layout_width="184dp"
+            <android.support.v7.widget.SwitchCompat
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Device 3"
                 android:id="@+id/sD3"
@@ -70,8 +94,8 @@
                 android:layout_below="@+id/sD2"
                 android:layout_centerHorizontal="true" />
 
-            <Switch
-                android:layout_width="184dp"
+            <android.support.v7.widget.SwitchCompat
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Device 4"
                 android:id="@+id/sD4"
@@ -83,16 +107,18 @@
 
         <LinearLayout
             android:orientation="vertical"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal">
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="10dp">
 
             <LinearLayout
                 android:orientation="horizontal"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_gravity="center_horizontal">
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="4">
 
                 <ToggleButton
                     android:layout_width="wrap_content"
@@ -100,86 +126,70 @@
                     android:id="@+id/tglSUN"
                     android:textOn="SUN"
                     android:textOff="SUN"
-                    android:checked="false" />
+                    android:checked="false"
+                    android:layout_weight="1" />
 
                 <ToggleButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/tglMON"
                     android:textOn="MON"
-                    android:textOff="MON"/>
+                    android:textOff="MON"
+                    android:layout_weight="1" />
 
                 <ToggleButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textOn="TUE"
                     android:textOff="TUE"
-                    android:id="@+id/tglTUE" />
+                    android:id="@+id/tglTUE"
+                    android:layout_weight="1" />
 
                 <ToggleButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textOn="WED"
                     android:textOff="WED"
-                    android:id="@+id/tglWED" />
+                    android:id="@+id/tglWED"
+                    android:layout_weight="1" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:orientation="horizontal"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal">
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="3">
 
                 <ToggleButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textOn="THU"
                     android:textOff="THU"
-                    android:id="@+id/tglTHU" />
+                    android:id="@+id/tglTHU"
+                    android:layout_weight="1" />
 
                 <ToggleButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textOn="FRI"
                     android:textOff="FRI"
-                    android:id="@+id/tglFRI" />
+                    android:id="@+id/tglFRI"
+                    android:layout_weight="1" />
 
                 <ToggleButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textOn="SAT"
                     android:textOff="SAT"
-                    android:id="@+id/tglSAT" />
+                    android:id="@+id/tglSAT"
+                    android:layout_weight="1" />
             </LinearLayout>
         </LinearLayout>
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:weightSum="1"
-            android:layout_gravity="center_horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Job Name:"
-                android:id="@+id/txtComment"
-                android:layout_marginTop="10dp" />
-
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/edComment"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="0.96"
-                android:hint="Write Comments Here" />
-        </LinearLayout>
-
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Save"
             android:id="@+id/btnSaveSceduale"
@@ -190,3 +200,4 @@
     </LinearLayout>
 
 </RelativeLayout>
+</ScrollView>

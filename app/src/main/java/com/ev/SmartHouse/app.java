@@ -2,10 +2,9 @@ package com.ev.SmartHouse;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.v7.widget.SwitchCompat;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Switch;
-
 import org.json.JSONArray;
 
 public class app {
@@ -20,6 +19,7 @@ public class app {
     public static String user="";
 
     static boolean isGCMregister;
+
     public static void gcmregister(Context context,String token){
         isGCMregister=false;
         try {
@@ -54,6 +54,7 @@ public class app {
 
 
     }
+
     public static void URL(String mode){
         if (mode.equals("1")){
             Mode ="1";
@@ -62,9 +63,8 @@ public class app {
         {Mode="0";
             url="http://"+remote+":3000/";}
     }
-    public static String getURL(){
-        return Mode;
-    }
+
+    public static String getURL(){return Mode;}
 
     public static void Set(String QRget){QR=QRget;}
 
@@ -126,11 +126,11 @@ public class app {
                 d2.setHint(obj2);
                 d3.setHint(obj3);
                 d4.setHint(obj4);
-            }else if(v1 instanceof Switch){
-                Switch d1 = (Switch) v1;
-                Switch d2 = (Switch) v2;
-                Switch d3 = (Switch) v3;
-                Switch d4 = (Switch) v4;
+            }else if(v1 instanceof SwitchCompat){
+                SwitchCompat d1 = (SwitchCompat) v1;
+                SwitchCompat d2 = (SwitchCompat) v2;
+                SwitchCompat d3 = (SwitchCompat) v3;
+                SwitchCompat d4 = (SwitchCompat) v4;
                 d1.setText(obj1);
                 d2.setText(obj2);
                 d3.setText(obj3);

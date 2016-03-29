@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.SwitchCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -16,21 +17,19 @@ import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import cz.msebera.android.httpclient.Header;
 
 public class MainActivity extends AppCompatActivity {
-    int end=0;
+    long end=0;
     boolean bootup=false;
-    Switch d1,d2,d3,d4,inout;
+    SwitchCompat d1,d2,d3,d4,inout;
     TextView tc,tm,ts,td;
     AsyncHttpClient client;
 
@@ -42,25 +41,22 @@ public class MainActivity extends AppCompatActivity {
         tc=(TextView)findViewById(R.id.txtCurrentTemp);
         tm=(TextView)findViewById(R.id.txtMonthlyTemp);
         ts=(TextView)findViewById(R.id.txtSeasonallyTemp);
-        d1=(Switch)findViewById(R.id.device1);
-        d2=(Switch)findViewById(R.id.device2);
-        d3=(Switch)findViewById(R.id.device3);
-        d4=(Switch)findViewById(R.id.device4);
-        inout=(Switch)findViewById(R.id.sStatus);
+        d1=(SwitchCompat)findViewById(R.id.device1);
+        d2=(SwitchCompat)findViewById(R.id.device2);
+        d3=(SwitchCompat)findViewById(R.id.device3);
+        d4=(SwitchCompat)findViewById(R.id.device4);
+        inout=(SwitchCompat)findViewById(R.id.sStatus);
+        app.URL("0");
         inout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (inout.isChecked()) {
                     app.URL("1");
-                    Toast.makeText(MainActivity.this,app.url, Toast.LENGTH_SHORT).show();
                 } else if (!inout.isChecked()) {
                     app.URL("0");
-                    Toast.makeText(MainActivity.this, app.url, Toast.LENGTH_SHORT).show();
                 }
             }
         });
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
         // Get Devices
         app.deviceGet(MainActivity.this, d1, d2, d3, d4);
@@ -109,28 +105,22 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (d4.isChecked()) {
-                    if(app.getURL().equals("0")){Change("D4", "1", d4);}
-                    else{ChangeLocal("D4", "1", d4);}
+                    if (app.getURL().equals("0")) {
+                        Change("D4", "1", d4);
+                    } else {
+                        ChangeLocal("D4", "1", d4);
+                    }
                 } else if (!d4.isChecked()) {
-                    if(app.getURL().equals("0")){Change("D4", "0", d4);}
-                    else{ChangeLocal("D4", "0",d4);}
+                    if (app.getURL().equals("0")) {
+                        Change("D4", "0", d4);
+                    } else {
+                        ChangeLocal("D4", "0", d4);
+                    }
                 }
             }
         });
         // Set the Devices
         statistics();
-        // Go to Schedule
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(app.Mode.equals("0")){
-                    Intent intent = new Intent(MainActivity.this, Scedule.class);
-                    startActivity(intent);}
-                else{
-                    Toast.makeText(MainActivity.this, "Please connect to the Internet", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
         reg();
     }
 
@@ -139,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
         RequestParams params = new RequestParams();
         params.put("user", app.getUser(MainActivity.this));
         client = new AsyncHttpClient();
-        client.post(app.url+"bootup", params, new JsonHttpResponseHandler() {
+        client.post(app.url + "bootup", params, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 super.onSuccess(statusCode, headers, response);
@@ -154,77 +144,103 @@ public class MainActivity extends AppCompatActivity {
                 // Daily average
                 try {
                     JSONObject avgDaily = response.getJSONArray(1).getJSONObject(0);
-                    if(avgDaily.getString("AVGD").equals("null")){
+                    if (avgDaily.getString("AVGD").equals("null")) {
                         td.setText("No Records ");
-                    }else {
+                    } else {
                         td.setText(avgDaily.getString("AVGD"));
                     }
-                } catch (JSONException e) {e.printStackTrace();}
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 // Monthly average
-                try{
+                try {
                     JSONObject avgMonthly = response.getJSONArray(2).getJSONObject(0);
                     tm.setText(avgMonthly.getString("AVGM"));
-                    if(avgMonthly.getString("AVGM").equals("null")){
+                    if (avgMonthly.getString("AVGM").equals("null")) {
                         tm.setText("No Records ");
-                    }else {
+                    } else {
                         tm.setText(avgMonthly.getString("AVGD"));
                     }
-                } catch (JSONException e) {e.printStackTrace();}
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 // Seasonlly average
-                try{
+                try {
                     JSONObject avgSeasonlly = response.getJSONArray(3).getJSONObject(0);
                     ts.setText(avgSeasonlly.getString("AVGS"));
-                    if(avgSeasonlly.getString("AVGS").equals("null")){ts.setText("No Records ");}
-                    else {ts.setText(avgSeasonlly.getString("AVGS"));}
+                    if (avgSeasonlly.getString("AVGS").equals("null")) {
+                        ts.setText("No Records ");
+                    } else {
+                        ts.setText(avgSeasonlly.getString("AVGS"));
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                     ts.setText("No Records");
                 }
                 // Device 1
-                try{
+                try {
                     JSONObject statusD1 = response.getJSONArray(4).getJSONObject(0);
-                    if (statusD1.getString("dMode").equals("1")){d1.setChecked(true);}
-                    else{d1.setChecked(false);}
-                } catch (JSONException e) {e.printStackTrace();}
+                    if (statusD1.getString("dMode").equals("1")) {
+                        d1.setChecked(true);
+                    } else {
+                        d1.setChecked(false);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 // Device 2
-                try{
+                try {
                     JSONObject statusD2 = response.getJSONArray(4).getJSONObject(1);
-                    if (statusD2.getString("dMode").equals("1")){d2.setChecked(true);}
-                    else{d2.setChecked(false);}
-                } catch (JSONException e) {e.printStackTrace();}
+                    if (statusD2.getString("dMode").equals("1")) {
+                        d2.setChecked(true);
+                    } else {
+                        d2.setChecked(false);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 // Device 3
-                try{
+                try {
                     JSONObject statusD3 = response.getJSONArray(4).getJSONObject(2);
-                    if (statusD3.getString("dMode").equals("1")){d3.setChecked(true);}
-                    else{d3.setChecked(false);}
-                } catch (JSONException e) {e.printStackTrace();}
+                    if (statusD3.getString("dMode").equals("1")) {
+                        d3.setChecked(true);
+                    } else {
+                        d3.setChecked(false);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 // Device 4
-                try{
+                try {
                     JSONObject statusD4 = response.getJSONArray(4).getJSONObject(3);
-                    if (statusD4.getString("dMode").equals("1")){d4.setChecked(true);}
-                    else{d4.setChecked(false);}
-                } catch (JSONException e) {e.printStackTrace();}
+                    if (statusD4.getString("dMode").equals("1")) {
+                        d4.setChecked(true);
+                    } else {
+                        d4.setChecked(false);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 // Local IP
-                try{
+                try {
                     JSONObject localip = response.getJSONArray(5).getJSONObject(0);
                     app.local = localip.getString("local");
-                    Toast.makeText(MainActivity.this, localip.getString("local"), Toast.LENGTH_SHORT).show();
-                }catch (JSONException e) {e.printStackTrace();}
-                bootup=true;
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                bootup = true;
             }
+
             @Override
-            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable)
-            {
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 super.onFailure(statusCode, headers, responseString, throwable);
                 Toast.makeText(MainActivity.this, responseString, Toast.LENGTH_SHORT).show();
                 throwable.printStackTrace();
             }
         });
-
-        Toast.makeText(MainActivity.this,String.valueOf(app.isgcmregistered(MainActivity.this)),Toast.LENGTH_SHORT).show();
     }
 
-    void ChangeLocal(String name, String mode,final Switch s){
+    void ChangeLocal(String name, String mode,final SwitchCompat s){
         if(bootup) {
             RequestParams params = new RequestParams();
             params.put("DN", name);
@@ -251,8 +267,9 @@ public class MainActivity extends AppCompatActivity {
             });
         }
     }
+
     // Setting up Devices
-    void Change(String name,String mode,final Switch s){
+    void Change(String name,String mode,final SwitchCompat s){
         if (app.getURL().equals("0")) {
             if(bootup) {
                 RequestParams params = new RequestParams();
@@ -289,11 +306,16 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (end>=1)
-        {
-            finish();
+        if (end + 2000 > System.currentTimeMillis()){
+            Intent done = new Intent();
+            done.setAction(Intent.ACTION_MAIN);
+            done.addCategory(Intent.CATEGORY_HOME);
+            startActivity(done);
         }
-        end++;
+        else{
+            Toast.makeText(MainActivity.this, "Press Once Again to Exit", Toast.LENGTH_SHORT).show();
+        }
+        end = System.currentTimeMillis();
     }
 
     @Override
@@ -310,8 +332,15 @@ public class MainActivity extends AppCompatActivity {
             case R.id.editOp:
                 showDialog();
                 break;
+            case R.id.scheduleOp:
+                if(app.Mode.equals("0")){
+                    Intent intent = new Intent(MainActivity.this, Scedule.class);
+                    startActivity(intent);}
+                else{
+                    Toast.makeText(MainActivity.this, "Please connect to the Internet", Toast.LENGTH_SHORT).show();
+                }
+                break;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -346,8 +375,6 @@ public class MainActivity extends AppCompatActivity {
         if (alert.isShowing()){
             app.deviceGet(MainActivity.this, ed1, ed2, ed3, ed4);
         }
-
-
     }
 
     public void reg(){
@@ -365,14 +392,18 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(int statusCode, Header[] headers, String responseString) {
                             Log.d("gcm", responseString);
-                            if(responseString.equals("ack token")){
+                            if (responseString.equals("ack token")) {
                                 app.setGCMlook(MainActivity.this);
                             }
                         }
                     }
             );
-
         }
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        statistics();
     }
 }

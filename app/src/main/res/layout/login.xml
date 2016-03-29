@@ -8,6 +8,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".Luncher"
 
+
     >
 
     <LinearLayout
@@ -16,7 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:padding="10dp"
-        >
+        android:id="@+id/linearLayout">
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -30,7 +31,7 @@
             android:password="true"
             android:id="@+id/Passin"
 
-            />
+            android:layout_marginTop="5dp" />
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -43,25 +44,34 @@
                 android:hint="Scan the QR Code"
                 android:password="true"
                 android:id="@+id/QR_Codein"
-                />
+                android:layout_marginTop="5dp"
+                android:layout_weight="0.5" />
 
             <Button
                 android:id="@+id/Scan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:layout_margin="4dp"
+                android:layout_margin="5dp"
                 android:text="Scan"
-                android:layout_weight="1.8" />
+                android:layout_weight="1.5" />
         </LinearLayout>
         <Button
             android:id="@+id/btnSingIn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:layout_margin="4dp"
+            android:layout_margin="5dp"
             android:text="Sign In"
-            />
+            android:layout_marginTop="5dp" />
     </LinearLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:layout_above="@+id/linearLayout"
+        android:src="@drawable/logo"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

@@ -1,43 +1,31 @@
 package com.ev.SmartHouse;
 
-import android.app.AlertDialog;
 import android.app.TimePickerDialog;
-import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
+import android.support.v7.widget.SwitchCompat;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.Switch;
 import android.widget.TimePicker;
 import android.widget.Toast;
 import android.widget.ToggleButton;
-
 import com.bruce.pickerview.popwindow.DatePickerPopWin;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
-
 import org.json.JSONArray;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-
 import cz.msebera.android.httpclient.Header;
 
-
 public class Scedule extends AppCompatActivity {
-    Switch sD1, sD2, sD3, sD4;
+    SwitchCompat sD1, sD2, sD3, sD4;
     ToggleButton tglSAT,tglSUN,tglMON,tglTUE,tglWED,tglTHU,tglFRI;
     Button btnDate, btnTime, btnSave;
     int Thoure, Tminute, Dyear, Dmonth, Dday;
-
     EditText ed;
     String Job="",St = "", D1 = "5 off", D2 = "6 off", D3 = "13 off", D4 = "26 off",Week="",SAT="",SUN="",MON="",TUE="",WED="",THU="",FRI="";
     AsyncHttpClient client;
@@ -48,10 +36,10 @@ public class Scedule extends AppCompatActivity {
         btnDate = (Button) findViewById(R.id.btnDate);
         btnTime = (Button) findViewById(R.id.btnTime);
         btnSave = (Button) findViewById(R.id.btnSaveSceduale);
-        sD1 = (Switch) findViewById(R.id.sD1);
-        sD2 = (Switch) findViewById(R.id.sD2);
-        sD3 = (Switch) findViewById(R.id.sD3);
-        sD4 = (Switch) findViewById(R.id.sD4);
+        sD1 = (SwitchCompat) findViewById(R.id.sD1);
+        sD2 = (SwitchCompat) findViewById(R.id.sD2);
+        sD3 = (SwitchCompat) findViewById(R.id.sD3);
+        sD4 = (SwitchCompat) findViewById(R.id.sD4);
         tglSAT=(ToggleButton)findViewById(R.id.tglSAT);
         tglSUN=(ToggleButton)findViewById(R.id.tglSUN);
         tglMON=(ToggleButton)findViewById(R.id.tglMON);
@@ -1283,67 +1271,6 @@ public class Scedule extends AppCompatActivity {
         else{btnSave.setEnabled(true);}
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater edit =getMenuInflater();
-        edit.inflate(R.menu.menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        switch(id){
-            case R.id.helpOp:
-                Toast.makeText(Scedule.this, "5asfo", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.closeOp:
-                Scedule.this.finish();
-                break;
-            case R.id.editOp:
-                showDialog();
-                break;
-            case R.id.setOp:
-                Toast.makeText(Scedule.this, "Setting", Toast.LENGTH_SHORT).show();
-                break;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-    public void showDialog(){
-        AlertDialog.Builder editDialog = new AlertDialog.Builder(this);
-        LayoutInflater in = this.getLayoutInflater();
-        final View dialogView = in.inflate(R.layout.editdialogg, null);
-        final EditText ed1 =(EditText)dialogView.findViewById(R.id.editD1);
-        final EditText ed2 =(EditText)dialogView.findViewById(R.id.editD2);
-        final EditText ed3 =(EditText)dialogView.findViewById(R.id.editD3);
-        final EditText ed4 =(EditText)dialogView.findViewById(R.id.editD4);
-        editDialog.setView(dialogView)
-                .setTitle("Rename Your Devices")
-                .setPositiveButton("Save", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        sD1.setText(ed1.getText().toString());
-                        sD2.setText(ed2.getText().toString());
-                        sD3.setText(ed3.getText().toString());
-                        sD4.setText(ed4.getText().toString());
-                        app.setDevice(Scedule.this,ed1.getText().toString().trim(),ed2.getText().toString().trim(),ed3.getText().toString().trim(),ed4.getText().toString().trim());
-                    }
-                })
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                });
-        AlertDialog alert = editDialog.create();
-        alert.show();
-        if (alert.isShowing()){
-            app.deviceGet(Scedule.this, ed1, ed2, ed3, ed4);
-        }
-
-
-    }
 }
 
 

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -20,16 +21,54 @@
         tools:context="com.example.snipersmaster.SmartHouse.MainActivity.MainActivity"
         android:orientation="vertical">
 
-        <Switch
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="New Switch"
-            android:id="@+id/sStatus"
-            android:textOff="Far from Home"
-            android:textOn="Inside Home"
+            android:weightSum="3"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Far from Home"
+                android:id="@+id/textView4" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:background="#ba3f51b5"
+                android:layout_gravity="left|center_vertical"
+                android:layout_weight="1.5" />
+
+            <android.support.v7.widget.SwitchCompat
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/sStatus"
+                android:textOff="Far from Home"
+                android:textOn="Inside Home"
 
 
-            android:enabled="true" />
+                android:enabled="true"
+                android:checked="false"
+                android:layout_weight="0.01" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="#ba3f51b5"
+                android:layout_weight="1.5" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Inside Home"
+                android:id="@+id/textView8" />
+        </LinearLayout>
 
         <LinearLayout
             android:orientation="horizontal"
@@ -229,7 +268,7 @@
                 android:background="#ba3f51b5" />
         </LinearLayout>
 
-        <Switch
+        <android.support.v7.widget.SwitchCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Device 1"
@@ -240,7 +279,7 @@
             android:layout_marginBottom="4dp"
             android:layout_marginTop="4dp" />
 
-        <Switch
+        <android.support.v7.widget.SwitchCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Device 2"
@@ -249,7 +288,7 @@
             android:textColor="#f5293381"
             android:layout_marginBottom="4dp" />
 
-        <Switch
+        <android.support.v7.widget.SwitchCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Device 3"
@@ -258,7 +297,7 @@
             android:textColor="#f5712981"
             android:layout_marginBottom="4dp" />
 
-        <Switch
+        <android.support.v7.widget.SwitchCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Device 4"
@@ -266,16 +305,5 @@
             android:checked="false"
             android:textColor="#f8298129"
             android:layout_marginBottom="4dp" />
-
     </LinearLayout>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
 </RelativeLayout>
