@@ -35,21 +35,21 @@
             <!--</intent-filter>-->
         </activity>
         <activity android:name="com.ev.SmartHouse.Scanner" android:theme="@style/Base.Theme.AppCompat.Light.Dialog.MinWidth"/>
-        <!-- [START gcm_receiver] -->
+         <!--[START gcm_receiver] -->
         <receiver
             android:name="com.google.android.gms.gcm.GcmReceiver"
             android:exported="true"
             android:permission="com.google.android.c2dm.permission.SEND" >
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-                <category android:name="gcm.play.android.samples.com.gcmquickstart" />
+                <category android:name="com.ev.SmartHouse" />
             </intent-filter>
         </receiver>
-        <!-- [END gcm_receiver] -->
+         <!--[END gcm_receiver] -->
 
         <!-- [START gcm_listener] -->
         <service
-            android:name="gcm.MyGcmListenerService"
+            android:name=".MyGcmListenerService"
             android:exported="false" >
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
@@ -58,7 +58,7 @@
         <!-- [END gcm_listener] -->
         <!-- [START instanceId_listener] -->
         <service
-            android:name="gcm.MyInstanceIDListenerService"
+            android:name=".MyInstanceIDListenerService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.android.gms.iid.InstanceID"/>
@@ -66,7 +66,7 @@
         </service>
         <!-- [END instanceId_listener] -->
         <service
-            android:name="gcm.RegistrationIntentService"
+            android:name=".RegistrationIntentService"
             android:exported="false">
         </service>
     </application>

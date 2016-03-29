@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -130,6 +131,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+        reg();
     }
 
     // Getting Temps and Current setting of Devices
@@ -345,6 +347,32 @@ public class MainActivity extends AppCompatActivity {
             app.deviceGet(MainActivity.this, ed1, ed2, ed3, ed4);
         }
 
+
+    }
+
+    public void reg(){
+        if(app.isgcmregistered(MainActivity.this)==false){
+            AsyncHttpClient asyncHttpClient=new AsyncHttpClient();
+            RequestParams params = new RequestParams();
+            params.put("user", app.getUser(MainActivity.this));
+            params.put("token", app.getToken(MainActivity.this));
+            asyncHttpClient.post(MainActivity.this, app.url + "token", params, new TextHttpResponseHandler() {
+                        @Override
+                        public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                            Log.d("gcm", responseString);
+                        }
+
+                        @Override
+                        public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                            Log.d("gcm", responseString);
+                            if(responseString.equals("ack token")){
+                                app.setGCMlook(MainActivity.this);
+                            }
+                        }
+                    }
+            );
+
+        }
 
     }
 }

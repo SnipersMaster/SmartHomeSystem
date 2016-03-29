@@ -18,17 +18,17 @@ import com.google.android.gms.common.GoogleApiAvailability;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.loopj.android.http.TextHttpResponseHandler;
+
 import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+
 import cz.msebera.android.httpclient.Header;
-import gcm.QuickstartPreferences;
-import gcm.RegistrationIntentService;
 
 public class Luncher extends AppCompatActivity {
     AsyncHttpClient client;
     Button btnQR,btnin;
     private static final String TAG = "Tag";
+
 
     EditText txuser,txpass,txQR;
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
@@ -38,6 +38,7 @@ public class Luncher extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
+
         if(app.getLuncher(Luncher.this)==0){
 
         }else if(app.getLuncher(Luncher.this)==1){
@@ -80,15 +81,17 @@ public class Luncher extends AppCompatActivity {
 
                             Toast.makeText(Luncher.this, response.getJSONObject(0).getString("ID"), Toast.LENGTH_SHORT).show();
 
-                           app.setUser(Luncher.this, response.getJSONObject(0).getString("ID"));
-                           RegistrationIntentService.id=response.getJSONObject(0).getString("ID");
+                          app.setUser(Luncher.this, response.getJSONObject(0).getString("ID"));
+                          RegistrationIntentService.id=response.getJSONObject(0).getString("ID");
+
 
                             if (checkPlayServices()) {
                                 // Start IntentService to register this application with GCM.
                                 Intent intent = new Intent(Luncher.this, RegistrationIntentService.class);
                                 startService(intent);
                             }
-
+                            Intent main=new Intent(Luncher.this,MainActivity.class);
+                            startActivity(main);
 
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -104,9 +107,11 @@ public class Luncher extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-       // registerReceiver();
+
         txQR.setText(app.QR);
+        //registerReceiver();
     }
+
 
     @Override
     protected void onPause() {

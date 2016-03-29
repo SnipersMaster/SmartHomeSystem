@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package gcm;
+package com.ev.SmartHouse;
 
 import android.app.IntentService;
 import android.content.Intent;
@@ -22,22 +22,13 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
-import android.widget.Toast;
 
-import com.ev.SmartHouse.Luncher;
-import com.ev.SmartHouse.MainActivity;
-import com.ev.SmartHouse.R;
-import com.ev.SmartHouse.app;
 import com.google.android.gms.gcm.GcmPubSub;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.google.android.gms.iid.InstanceID;
 import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.io.IOException;
 
@@ -67,7 +58,7 @@ public class RegistrationIntentService extends IntentService {
             String token = instanceID.getToken(getString(R.string.gcm_defaultSenderId),
                     GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
             // [END get_token]
-            Log.i(TAG, "GCM Registration Token: " + token);
+            //Log.i(TAG, "GCM Registration Token: " + token);
 
             // TODO: Implement this method to send any registration to your app's servers.
             sendRegistrationToServer(token);
@@ -100,9 +91,9 @@ public class RegistrationIntentService extends IntentService {
      * @param token The new token.
      */
     private void sendRegistrationToServer(String token) {
-       Log.d("GCM","Your Token is "+token);
-
-        //app.gcmregister(RegistrationIntentService.this,token);
+       //Log.d("GCM","Your Token is from regclass"+token);
+      //  app.gcmregister();
+        app.gcmregister(RegistrationIntentService.this,token);
     // Add custom implementation, as needed.
     }
 

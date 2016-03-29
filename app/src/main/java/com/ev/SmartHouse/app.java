@@ -31,8 +31,20 @@ public class app {
         }catch (Exception ex){ex.printStackTrace();}
 
     }
-    public static void setGCMisRegistered(Context context){
-        isGCMregister=false;
+
+    public static String getToken(Context context){
+        sharedPreferences = context.getSharedPreferences("smarthouse",Context.MODE_PRIVATE);
+        return sharedPreferences.getString("token", "");
+
+    }
+
+    public static boolean isgcmregistered(Context context){
+            sharedPreferences = context.getSharedPreferences("smarthouse",Context.MODE_PRIVATE);
+            return sharedPreferences.getBoolean("isGCMregister", false);
+
+    }
+
+    public static void setGCMlook(Context context){
         try {
             sharedPreferences = context.getSharedPreferences("smarthouse",Context.MODE_PRIVATE);
             editor=sharedPreferences.edit();
@@ -40,13 +52,8 @@ public class app {
             editor.apply();
         }catch (Exception ex){ex.printStackTrace();}
 
-    }
-    public static boolean isgcmregistered(Context context){
-            sharedPreferences = context.getSharedPreferences("smarthouse",Context.MODE_PRIVATE);
-            return sharedPreferences.getBoolean("isGCMregister",false);
 
     }
-
     public static void URL(String mode){
         if (mode.equals("1")){
             Mode ="1";

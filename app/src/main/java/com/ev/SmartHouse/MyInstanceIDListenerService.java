@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package gcm;
+package com.ev.SmartHouse;
 
 import android.content.Intent;
 
