@@ -71,7 +71,7 @@ public class Luncher extends AppCompatActivity {
                 params.put("user", txuser.getText().toString());
                 params.put("pass", txpass.getText().toString());
                 params.put("qr", txQR.getText().toString());
-                client = new AsyncHttpClient();
+                client =new AsyncHttpClient(true,80,3000);
                 client.post(app.url + "auth", params, new JsonHttpResponseHandler() {
 
 
@@ -135,7 +135,7 @@ public class Luncher extends AppCompatActivity {
 
 
     public void reg(String token,String id){
-            AsyncHttpClient asyncHttpClient=new AsyncHttpClient();
+            AsyncHttpClient asyncHttpClient=new AsyncHttpClient(true,80,3000);
             RequestParams params = new RequestParams();
             params.put("user", id);
             params.put("token", token);

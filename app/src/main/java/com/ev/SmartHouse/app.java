@@ -15,7 +15,7 @@ public class app {
     public static String QR="";
     public static String Mode="";
     public static String local="localhost",remote="104.236.253.6";
-    public static String url="http://104.236.253.6:3000/";
+    public static String url="https://104.236.253.6:3000/";
     public static String user="";
 
 
@@ -25,7 +25,7 @@ public class app {
             url="http://"+local+":4000/";}
         else if (mode.equals("0"))
         {Mode="0";
-            url="http://"+remote+":3000/";}
+            url="https://"+remote+":3000/";}
     }
 
     public static String getURL(){return Mode;}

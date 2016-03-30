@@ -165,7 +165,7 @@ public class Scedule extends AppCompatActivity {
                     params.put("job", Job);
                     params.put("deviceStatus", St);
                     params.put("comment",ed.getText().toString());
-                    client = new AsyncHttpClient();
+                    client = new AsyncHttpClient(true,80,3000);
                     client.post(app.url + "createJob", params, new JsonHttpResponseHandler() {
                         @Override
                         public void onSuccess(int statusCode, Header[] headers, JSONArray response) {

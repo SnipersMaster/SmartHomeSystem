@@ -134,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
     void statistics(){
         RequestParams params = new RequestParams();
         params.put("user", app.getUser(MainActivity.this));
-        client = new AsyncHttpClient();
+        client = new AsyncHttpClient(true,80,3000);
         client.post(app.url + "bootup", params, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
@@ -282,7 +282,7 @@ public class MainActivity extends AppCompatActivity {
                 params.put("user", app.getUser(MainActivity.this));
                 params.put("DN", name);
                 params.put("DM", mode);
-                client = new AsyncHttpClient();
+                client = new AsyncHttpClient(true,80,3000);
                 client.post(app.url+ "changeDeviceMode", params, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
